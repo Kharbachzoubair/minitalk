@@ -2,34 +2,37 @@
 #include <signal.h>
 #include <stdio.h>
 
-
-void    zoubir(int s)
+void    zoubir(int signal)
 {
-    char c = 0;
-    int count = 0;
-    int bit;
-    if (s == SIGUSR1)
-        bit = 1;
-    else if (s == SIGUSR2)
-        bit = 0;
+    static char c = 0;
+    static int count = 0;
 
-    while (count < 8)
+    // 1️⃣ Check which signal was received
+    int bit = (signal == SIGUSR1) ? 1 : 0;
+
+    // 2️⃣ Shift and store the bit
+    c = (c << 1) | bit;
+    count++;
+
+    // 3️⃣ If 8 bits are received, print the character
+    if (count == 8)
     {
-        c
-        count++;
+        write(1, &c, 1); // Print the character
+        count = 0;       // Reset counter
+        c = 0;           // Reset character
     }
 }
 
 
-
 int main()
 {
+    printf("Server PID: %d\n", getpid());
+
+    // Listen for signals
     signal(SIGUSR1, zoubir);
     signal(SIGUSR2, zoubir);
-    printf("server pid  =  %d\n", getpid());
+
+    // Keep running
     while (1)
-    {
-        pause();
-    }
-    
+        pause(); // Wait for signals
 }
