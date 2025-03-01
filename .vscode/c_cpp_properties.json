@@ -1,6 +1,7 @@
 {
   "configurations": [
     {
+<<<<<<< HEAD
       "name": "windows-gcc-x86",
       "includePath": [
         "${workspaceFolder}/**"
@@ -9,6 +10,16 @@
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "windows-gcc-x86",
+=======
+      "name": "macos-clang-x64",
+      "includePath": [
+        "${workspaceFolder}/**"
+      ],
+      "compilerPath": "/usr/bin/clang",
+      "cStandard": "${default}",
+      "cppStandard": "${default}",
+      "intelliSenseMode": "macos-clang-x64",
+>>>>>>> 9ff2233dac2e17c0d600be32a2ed9866d055f918
       "compilerArgs": [
         ""
       ]
