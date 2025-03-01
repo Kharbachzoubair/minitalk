@@ -9,50 +9,9 @@
 /*   Updated: 2025/02/27 00:39:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <windows.h>
+#include <signal.h>
 #include <stdio.h>
 
-<<<<<<< HEAD
-#define PIPE_NAME "\\\\.\\pipe\\MyPipe"
-
-int main()
-{
-    HANDLE hPipe;
-    char buffer[1024];
-    DWORD bytesRead;
-
-    printf("Server started. Waiting for client...\n");
-
-    hPipe = CreateNamedPipeA(
-        PIPE_NAME,              // Pipe name
-        PIPE_ACCESS_INBOUND,    // Read-only pipe
-        PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT, 
-        1,                      // Only one client
-        1024, 1024, 0, NULL);
-
-    if (hPipe == INVALID_HANDLE_VALUE)
-    {
-        printf("Failed to create pipe.\n");
-        return 1;
-    }
-
-    if (ConnectNamedPipe(hPipe, NULL))
-    {
-        printf("Client connected!\n");
-        ReadFile(hPipe, buffer, sizeof(buffer), &bytesRead, NULL);
-        buffer[bytesRead] = '\0'; // Ensure null termination
-        printf("Received: %s\n", buffer);
-        DisconnectNamedPipe(hPipe);
-    }
-    else
-    {
-        printf("Failed to connect.\n");
-    }
-
-    CloseHandle(hPipe);
-    return 0;
-}
-=======
 void    zoubir(int signal)
 {
     static char c = 0;
@@ -87,4 +46,4 @@ int main()
     while (1)
         pause(); // Wait for signals
 }
->>>>>>> 9ff2233dac2e17c0d600be32a2ed9866d055f918
+
