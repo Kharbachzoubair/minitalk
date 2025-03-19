@@ -3,33 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zkharbac <zkharbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 00:39:19 by marvin            #+#    #+#             */
-/*   Updated: 2025/02/27 00:39:19 by marvin           ###   ########.fr       */
+/*   Updated: 2025/03/02 13:39:52 by zkharbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <signal.h>
-#include <stdio.h>
+
+#include <signal.h>  
+#include <unistd.h>  
+#include <stdio.h>   
+
 
 void    zoubir(int signal)
 {
     static char c = 0;
     static int count = 0;
 
-    // 1️⃣ Check which signal was received
+    
     int bit = (signal == SIGUSR1) ? 1 : 0;
 
-    // 2️⃣ Shift and store the bit
+   
     c = (c << 1) | bit;
     count++;
 
-    // 3️⃣ If 8 bits are received, print the character
+   
     if (count == 8)
     {
-        write(1, &c, 1); // Print the character
-        count = 0;       // Reset counter
-        c = 0;           // Reset character
+        write(1, &c, 1); 
+        count = 0;
+        c = 0;
     }
 }
 

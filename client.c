@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zkharbac <zkharbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 00:39:51 by marvin            #+#    #+#             */
-/*   Updated: 2025/02/27 00:39:51 by marvin           ###   ########.fr       */
+/*   Updated: 2025/03/02 13:41:24 by zkharbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <signal.h>  // Needed for SIGUSR1, SIGUSR2, kill()
+#include <signal.h>
+#include "stdio.h"
 
 unsigned long is_int(char *str)
 {
