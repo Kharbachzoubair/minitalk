@@ -6,26 +6,13 @@
 /*   By: zkharbac <zkharbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 00:39:51 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/20 21:38:27 by zkharbac         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zkharbac <zkharbac@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 00:39:51 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/02 13:41:24 by zkharbac         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:51:54 by zkharbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <signal.h>
-#include <stdio.h>
 
 unsigned long	is_int(char *str)
 {
@@ -82,23 +69,27 @@ void	send_message(pid_t server_pid, char *message)
 	send_bit(server_pid, '\0');
 }
 
+void	print_str(char *str)
+{
+	while (*str)
+		write(1, str++, 1);
+}
 
+int	main(int argc, char *argv[])
+{
+	pid_t	server_pid;
 
-// int main(int argc, char *argv[])
-// {
-// 	if (argc != 3)
-// 	{
-// 	printf("Usage: %s <Server PID> <Message>\n", argv[0]);
-// 	return (1);
-// 	}
-
-// 	pid_t server_pid = is_int(argv[1]);
-// 	if (server_pid <= 0)
-// 	{
-// 	printf("SOS -- Invalid PID --\n");
-// 	return (1);
-// 	}
-
-// 	send_message(server_pid, argv[2]);
-
-// }
+	if (argc != 3)
+	{
+		print_str("Usage: ./client <Server PID> <Message>\n");
+		return (1);
+	}
+	server_pid = is_int(argv[1]);
+	if (server_pid <= 0)
+	{
+		print_str("SOS -- Invalid PID --\n");
+		return (1);
+	}
+	send_message(server_pid, argv[2]);
+	return (0);
+}
