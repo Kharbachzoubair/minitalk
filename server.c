@@ -6,7 +6,7 @@
 /*   By: zkharbac <zkharbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 00:39:19 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/20 22:56:43 by zkharbac         ###   ########.fr       */
+/*   Updated: 2025/03/20 23:37:17 by zkharbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <stdio.h>   
 #include <stdlib.h>
 #include <signal.h>
-#include "../ft_printf/ft_printf.h"
+#include "ft_printf/ft_printf.h"
+
 
 void	p_character(int *count, char *c)
 {
