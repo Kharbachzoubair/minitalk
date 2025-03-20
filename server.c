@@ -6,7 +6,7 @@
 /*   By: zkharbac <zkharbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 00:39:19 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/20 20:40:38 by zkharbac         ###   ########.fr       */
+/*   Updated: 2025/03/20 21:21:31 by zkharbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,24 @@
 #include <stdlib.h>
 #include <signal.h>
 
-void signal_handler(int signal, siginfo_t *info, void *context)
+void	p_character(int *count, char *c)
 {
-	static char c = 0;
-	static int count = 0;
-	static pid_t pid = -1;
-   
+	if (*count == 8)
+	{
+		*count = 0;
+		if (*c == '\0')
+			write(1, "\n", 1);
+		else
+			write(1, c, 1);
+		*c = 0;
+	}
+}
+void	signal_handler(int signal, siginfo_t *info, void *context)
+{
+	static char	c;
+	static int	count;
+	static pid_t	pid;
+	int		bit;
 
 	(void)context;
 	if (pid != info->si_pid)
@@ -29,44 +41,26 @@ void signal_handler(int signal, siginfo_t *info, void *context)
 		c = 0;
 		pid = info->si_pid;
 	}
-	
-	int bit = (signal == SIGUSR1) ? 1 : 0;
-
+	if (signal == SIGUSR1)
+		bit = 1;
+	else
+		bit = 0;
 	c = (c << 1) | bit;
 	count++;
-
-	if (count == 8) 
-	{
-	if (c == '\0') 
-	write(1, "\n", 1);
-	else 
-	write(1, &c, 1);
-	
-	c = 0;
-	count = 0;
-	}
-
-	}
+	p_character(&count,&c);
+}
 
 
 int main()
 {
-	struct sigaction sa;
+	struct sigaction	sa;
+
+	ft_printf("Server PID: %d\n", getpid());
 	sa.sa_sigaction = signal_handler;
 	sa.sa_flags = SA_SIGINFO;
-
 	sigemptyset(&sa.sa_mask);
-
-	printf("Server PID: %d\n", getpid());
-
-	if (sigaction(SIGUSR1, &sa, NULL) == -1 || sigaction(SIGUSR2, &sa, NULL) == -1)
-	{
-	perror("sigaction failed");
-	return EXIT_FAILURE;
-	}
-
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
-	pause();
-
-	return 0;
+		pause();
 }
