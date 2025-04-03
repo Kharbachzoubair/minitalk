@@ -41,3 +41,66 @@ The project is organized into the following files:
    ```bash
    make
    ```
+
+## 🖥️ Usage
+
+### 1. Run the Server
+First, you need to start the server. Open a terminal window and run the server:
+```bash
+./server
+```
+The server will listen for incoming signals from the client.
+
+### 2. Run the Client
+In another terminal window, run the client and pass the server's process ID (PID) and the message you want to send:
+
+```bash
+./client <server_pid> "Hello, World!"
+```
+The client will send the message bit-by-bit to the server using signals. The server will decode the message and display it.
+
+## 🔧 How It Works
+The client sends each character in the message as a series of bits, with each bit sent via a signal (SIGUSR1 for 0 and SIGUSR2 for 1).
+
+The server decodes the incoming signals and reconstructs the original message.
+
+The client and server communicate through signals in a loop, with each signal representing one bit of a character.
+
+## ❓ How to Contribute
+If you'd like to contribute to the project:
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+   
+## ❓ How to Contribute
+If you'd like to contribute to the project:
+
+1. Fork the repository.
+
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -am 'Add new feature'
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Open a pull request.
+
+## 💡 Future Improvements
+- Add error handling for invalid PID inputs.
+- Enhance the server's ability to handle multiple clients.
+
+## 👨‍💻 Author
+Kharbachzoubair  
+42 School
+
+
+
