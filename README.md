@@ -36,4 +36,8 @@ The project is organized into the following files:
 2. Navigate to the project directory:
    ```bash
    cd minitalk42
-
+   ```
+3. Compile the project using the Makefile:
+   ```bash
+   make
+   ```
